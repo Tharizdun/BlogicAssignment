@@ -9,6 +9,19 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<form asp-for="Index" class="row g-2 mb-1">
+    <div class="col-auto">
+        <label for="search" class="form-label">Filter contracts by evidence number or institution</label>
+    </div>
+    <div class="col-auto">
+        <input type="search" id="search" name="Search" class="form-control">
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary mb-3">Search</button>
+    </div>
+</form>
+
 <table class="table">
     <thead>
         <tr>

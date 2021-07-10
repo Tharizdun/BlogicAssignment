@@ -20,9 +20,13 @@ namespace BlogicAssignment.Controllers
         }
 
         // GET: Clients
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string Search)
         {
-            return View(await _context.Clients.ToListAsync());
+            if (!String.IsNullOrEmpty(Search))
+            {
+                return View(await _context.Clients.Where(c => c.LastName.Contains(Search)).ToListAsync());
+            }
+            else return View(await _context.Clients.ToListAsync());
         }
 
         // GET: Clients/Details/5

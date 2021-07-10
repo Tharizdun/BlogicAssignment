@@ -20,10 +20,21 @@ namespace BlogicAssignment.Controllers
         }
 
         // GET: Contracts
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string Search)
         {
-            var blogicAssignmentDbContext = _context.Contracts.Include(c => c.Client).Include(c => c.Supervisor);
-            return View(await blogicAssignmentDbContext.ToListAsync());
+            if(!String.IsNullOrEmpty(Search))
+            {
+                var blogicAssignmentDbContext = _context.Contracts
+                    .Where(c => c.EvidenceNumber.Contains(Search) || c.Institution.Contains(Search))
+                    .Include(c => c.Client)
+                    .Include(c => c.Supervisor);
+                return View(await blogicAssignmentDbContext.ToListAsync());
+            }
+            else
+            {
+                var blogicAssignmentDbContext = _context.Contracts.Include(c => c.Client).Include(c => c.Supervisor);
+                return View(await blogicAssignmentDbContext.ToListAsync());
+            }   
         }
 
         // GET: Contracts/Details/5
