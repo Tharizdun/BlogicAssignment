@@ -14,5 +14,7 @@ namespace BlogicAssignment.Models
         [InverseProperty("Supervisor")]
         public ICollection<Contract> SupervisedContracts { get; set; }
         public ICollection<AdvisorContract> AdvisedContracts { get; set; }
+        [Display(Name = "Advisor")]
+        public string FullName => FirstName + " " + LastName;
     }
 }

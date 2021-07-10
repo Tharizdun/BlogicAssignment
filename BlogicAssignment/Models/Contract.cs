@@ -12,8 +12,10 @@ namespace BlogicAssignment.Models
         [Key]
         public int ContractID { get; set; }
         [Required]
+        [Display(Name = "Evidence Number")]
         public string EvidenceNumber { get; set; }
         [Required]
+        [Display(Name = "Institution")]
         public string Institution { get; set; }
 
         public Advisor Supervisor { get; set; }
@@ -24,10 +26,16 @@ namespace BlogicAssignment.Models
         public int ClientID { get; set; }
 
         [Required]
+        [DataType(DataType.Date)]
+        [Display(Name = "Enter Date")]
         public DateTime ContractEnterDate { get; set; }
         [Required]
+        [DataType(DataType.Date)]
+        [Display(Name = "Valid Date")]
         public DateTime ContractValidSinceDate { get; set; }
         [Required]
+        [DataType(DataType.Date)]
+        [Display(Name = "End Date")]
         public DateTime ContractEndDate { get; set; }
     }
 }

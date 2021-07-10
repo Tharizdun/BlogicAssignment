@@ -19,10 +19,10 @@
                 @Html.DisplayNameFor(model => model.Institution)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Supervisor)
+                @Html.DisplayNameFor(model => model.Supervisor.FullName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Client)
+                @Html.DisplayNameFor(model => model.Client.FullName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ContractEnterDate)
@@ -46,10 +46,10 @@
                 @Html.DisplayFor(modelItem => item.Institution)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Supervisor.BirthNumber)
+                @Html.DisplayFor(modelItem => item.Supervisor.FullName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Client.BirthNumber)
+                @Html.DisplayFor(modelItem => item.Client.FullName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ContractEnterDate)

@@ -12,5 +12,7 @@ namespace BlogicAssignment.Models
         [Key]
         public int ClientID { get; set; }
         public ICollection<Contract> Contracts { get; set; }
+        [Display(Name = "Client")]
+        public string FullName => FirstName + " " + LastName;
     }
 }

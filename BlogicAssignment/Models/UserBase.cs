@@ -10,16 +10,23 @@ namespace BlogicAssignment.Models
     public class UserBase
     {
         [Required]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
         [Required]
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
         [Required]
+        [Display(Name = "Birth Number")]
         public string BirthNumber { get; set; }
         [Required]
         public int Age { get; set; }
         [Required]
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "Phone Number")]
         public string Phone { get; set; }
         [Required]
+        [Display(Name = "Email Address")]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
     }
 }
