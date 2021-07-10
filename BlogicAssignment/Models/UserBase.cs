@@ -17,6 +17,7 @@ namespace BlogicAssignment.Models
         public string LastName { get; set; }
         [Required]
         [Display(Name = "Birth Number")]
+        [RegularExpression(@"^[0-9]{6}\/[0-9]{3,4}$", ErrorMessage = "Birth number must have following format: YYMMDD/NNNN or YYMMDD/NNN")]
         public string BirthNumber { get; set; }
         [Required]
         public int Age { get; set; }
