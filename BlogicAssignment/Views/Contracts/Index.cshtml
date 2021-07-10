@@ -1,0 +1,71 @@
+﻿@model IEnumerable<BlogicAssignment.Models.Contract>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EvidenceNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Institution)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Supervisor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Client)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContractEnterDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContractValidSinceDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContractEndDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EvidenceNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Institution)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Supervisor.BirthNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client.BirthNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContractEnterDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContractValidSinceDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContractEndDate)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ContractID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ContractID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ContractID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

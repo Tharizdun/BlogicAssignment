@@ -1,0 +1,61 @@
+﻿@model BlogicAssignment.Models.Contract
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Contract</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="EvidenceNumber" class="control-label"></label>
+                <input asp-for="EvidenceNumber" class="form-control" />
+                <span asp-validation-for="EvidenceNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Institution" class="control-label"></label>
+                <input asp-for="Institution" class="form-control" />
+                <span asp-validation-for="Institution" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SupervisorID" class="control-label"></label>
+                <select asp-for="SupervisorID" class ="form-control" asp-items="ViewBag.SupervisorID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClientID" class="control-label"></label>
+                <select asp-for="ClientID" class ="form-control" asp-items="ViewBag.ClientID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ContractEnterDate" class="control-label"></label>
+                <input asp-for="ContractEnterDate" class="form-control" />
+                <span asp-validation-for="ContractEnterDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ContractValidSinceDate" class="control-label"></label>
+                <input asp-for="ContractValidSinceDate" class="form-control" />
+                <span asp-validation-for="ContractValidSinceDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ContractEndDate" class="control-label"></label>
+                <input asp-for="ContractEndDate" class="form-control" />
+                <span asp-validation-for="ContractEndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
