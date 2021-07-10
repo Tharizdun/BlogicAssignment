@@ -25,14 +25,14 @@
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Supervisor)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Supervisor.FullName)
+        <dd class="col-sm-10">
+            <a asp-controller="Advisors" asp-action="Details" asp-route-id="@Model.SupervisorID">@Html.DisplayFor(model => model.Supervisor.FullName)</a>
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Client)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Client.FullName)
+            <a asp-controller="Clients" asp-action="Details" asp-route-id="@Model.ClientID">@Html.DisplayFor(model => model.Client.FullName)</a>
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.ContractEnterDate)
