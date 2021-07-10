@@ -116,35 +116,6 @@ namespace BlogicAssignment.Controllers
             return View(advisor);
         }
 
-        // GET: Advisors/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var advisor = await _context.Advisors
-                .FirstOrDefaultAsync(m => m.AdvisorID == id);
-            if (advisor == null)
-            {
-                return NotFound();
-            }
-
-            return View(advisor);
-        }
-
-        // POST: Advisors/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var advisor = await _context.Advisors.FindAsync(id);
-            _context.Advisors.Remove(advisor);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
         private bool AdvisorExists(int id)
         {
             return _context.Advisors.Any(e => e.AdvisorID == id);

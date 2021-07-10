@@ -85,8 +85,8 @@ namespace BlogicAssignment.Controllers
             {
                 return NotFound();
             }
-            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "BirthNumber", contract.ClientID);
-            ViewData["SupervisorID"] = new SelectList(_context.Advisors, "AdvisorID", "BirthNumber", contract.SupervisorID);
+            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "FullName", contract.ClientID);
+            ViewData["SupervisorID"] = new SelectList(_context.Advisors, "AdvisorID", "FullName", contract.SupervisorID);
             return View(contract);
         }
 
@@ -122,40 +122,9 @@ namespace BlogicAssignment.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "BirthNumber", contract.ClientID);
-            ViewData["SupervisorID"] = new SelectList(_context.Advisors, "AdvisorID", "BirthNumber", contract.SupervisorID);
+            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "FullName", contract.ClientID);
+            ViewData["SupervisorID"] = new SelectList(_context.Advisors, "AdvisorID", "FullName", contract.SupervisorID);
             return View(contract);
-        }
-
-        // GET: Contracts/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var contract = await _context.Contracts
-                .Include(c => c.Client)
-                .Include(c => c.Supervisor)
-                .FirstOrDefaultAsync(m => m.ContractID == id);
-            if (contract == null)
-            {
-                return NotFound();
-            }
-
-            return View(contract);
-        }
-
-        // POST: Contracts/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var contract = await _context.Contracts.FindAsync(id);
-            _context.Contracts.Remove(contract);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool ContractExists(int id)
