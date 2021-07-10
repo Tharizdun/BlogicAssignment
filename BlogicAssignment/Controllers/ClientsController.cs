@@ -38,6 +38,7 @@ namespace BlogicAssignment.Controllers
             }
 
             var client = await _context.Clients
+                .Include(m => m.Contracts)
                 .FirstOrDefaultAsync(m => m.ClientID == id);
             if (client == null)
             {

@@ -38,6 +38,7 @@ namespace BlogicAssignment.Controllers
             }
 
             var advisor = await _context.Advisors
+                .Include(m => m.SupervisedContracts)
                 .FirstOrDefaultAsync(m => m.AdvisorID == id);
             if (advisor == null)
             {
