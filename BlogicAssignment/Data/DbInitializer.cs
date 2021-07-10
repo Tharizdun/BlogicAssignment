@@ -11,8 +11,6 @@ namespace BlogicAssignment.Data
     {
         public static void Initialize(BlogicAssignmentDbContext context) 
         {
-            context.Database.EnsureCreated();
-
             // Look for any clients.
             if (context.Clients.Any())
             {
