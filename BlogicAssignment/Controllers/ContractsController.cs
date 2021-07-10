@@ -43,6 +43,22 @@ namespace BlogicAssignment.Controllers
                 return NotFound();
             }
 
+            // Find advisors overseeing this contract
+            var advisorContract = await _context.AdvisorContracts
+                .Include(c => c.Advisor)
+                .Where(c => c.ContractID == id)
+                .ToListAsync();
+            List<Advisor> advisors = new();
+            foreach(var ac in advisorContract)
+            {
+                advisors.Add(ac.Advisor);
+            }
+            if (advisors.Any())
+            {
+                ViewData["Advisors"] = advisors;
+            }
+            else ViewData["Advisors"] = null;
+
             return View(contract);
         }
 

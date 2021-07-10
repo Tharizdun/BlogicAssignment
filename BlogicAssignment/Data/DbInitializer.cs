@@ -171,23 +171,18 @@ namespace BlogicAssignment.Data
            {
                 new AdvisorContract
                 {
-                    AdvisorID = context.Advisors.Single(a => a.LastName == "Li").AdvisorID,
-                    ContractID = context.Clients.Single(c => c.LastName == "Alexander").ClientID
-                },
-                new AdvisorContract
-                {
                     AdvisorID = context.Advisors.Single(a => a.LastName == "Justice").AdvisorID,
-                    ContractID = context.Clients.Single(c => c.LastName == "Alexander").ClientID
+                    ContractID = context.Contracts.Single(c => c.EvidenceNumber == "100").ContractID
                 },
                new AdvisorContract
                 {
                     AdvisorID = context.Advisors.Single(a => a.LastName == "Norman").AdvisorID,
-                    ContractID = context.Clients.Single(c => c.LastName == "Alexander").ClientID
+                    ContractID = context.Contracts.Single(c => c.EvidenceNumber == "100").ContractID
                 },
                 new AdvisorContract
                 {
                     AdvisorID = context.Advisors.Single(a => a.LastName == "Olivetto").AdvisorID,
-                    ContractID = context.Clients.Single(c => c.LastName == "Alexander").ClientID
+                    ContractID = context.Contracts.Single(c => c.EvidenceNumber == "100").ContractID
                 },
            };
 

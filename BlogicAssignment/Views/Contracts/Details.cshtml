@@ -10,48 +10,61 @@
     <h4>Contract</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.EvidenceNumber)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.EvidenceNumber)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Institution)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Institution)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Supervisor)
         </dt>
         <dd class="col-sm-10">
             <a asp-controller="Advisors" asp-action="Details" asp-route-id="@Model.SupervisorID">@Html.DisplayFor(model => model.Supervisor.FullName)</a>
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Client)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             <a asp-controller="Clients" asp-action="Details" asp-route-id="@Model.ClientID">@Html.DisplayFor(model => model.Client.FullName)</a>
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ContractEnterDate)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ContractEnterDate)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ContractValidSinceDate)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ContractValidSinceDate)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ContractEndDate)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ContractEndDate)
         </dd>
+        @if (@ViewBag.Advisors != null)
+        {
+            @foreach (Advisor advisor in ViewBag.Advisors)
+            {
+                <dt class="col-sm-2">
+                    Advisor
+                </dt>
+
+                <dd class="col-sm-10">
+                    <a asp-controller="Advisors" asp-action="Details" asp-route-id="@advisor.AdvisorID">@advisor.FullName</a>
+                </dd>
+            }
+        }
     </dl>
 </div>
 <div>
