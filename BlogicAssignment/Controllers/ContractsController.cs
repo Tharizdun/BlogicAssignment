@@ -49,8 +49,8 @@ namespace BlogicAssignment.Controllers
         // GET: Contracts/Create
         public IActionResult Create()
         {
-            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "BirthNumber");
-            ViewData["SupervisorID"] = new SelectList(_context.Advisors, "AdvisorID", "BirthNumber");
+            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "FullName");
+            ViewData["SupervisorID"] = new SelectList(_context.Advisors, "AdvisorID", "FullName");
             return View();
         }
 
