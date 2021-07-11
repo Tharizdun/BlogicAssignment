@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BlogicAssignment.Data;
 using BlogicAssignment.Models;
+using System.Text;
 
 namespace BlogicAssignment.Controllers
 {
@@ -124,6 +125,19 @@ namespace BlogicAssignment.Controllers
         private bool ClientExists(int id)
         {
             return _context.Clients.Any(e => e.ClientID == id);
+        }
+
+        // https://www.codingvila.com/2021/03/export-data-to-csv-file-using-aspnet-mvc.html
+        public async Task<IActionResult> ExportToCSV()
+        {
+            var clients = await _context.Clients.ToListAsync();
+            StringBuilder sb = new();
+            sb.AppendLine("Client ID;First name;Last name;Birth number;Age;Phone number;Email address");
+            foreach(Client client in clients)
+            {
+                sb.AppendLine($"{client.ClientID};{client.FirstName};{client.LastName};{client.BirthNumber};{client.Age};{client.Phone};{client.Email}");
+            }
+            return File(Encoding.UTF8.GetBytes(sb.ToString()), "text/csv", "Clients.csv");
         }
     }
 }

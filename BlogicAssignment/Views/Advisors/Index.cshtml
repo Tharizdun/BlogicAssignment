@@ -4,11 +4,11 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Advisors</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<h1>
+    Advisors
+    <a asp-action="Create" class="btn btn-outline-primary" role="button">Create New</a>
+    <a asp-action="ExportToCSV" class="btn btn-outline-success" role="button">Export to CSV</a>
+</h1>
 
 <form asp-for="Index" class="row g-2 mb-1">
     <div class="col-auto">
@@ -18,7 +18,7 @@
         <input type="search" id="search" name="Search" class="form-control">
     </div>
     <div class="col-auto">
-        <button type="submit" class="btn btn-primary mb-3">Search</button>
+        <button type="submit" class="btn btn-outline-primary mb-3">Search</button>
     </div>
 </form>
 

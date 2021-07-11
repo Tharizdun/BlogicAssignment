@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BlogicAssignment.Data;
 using BlogicAssignment.Models;
+using System.Text;
 
 namespace BlogicAssignment.Controllers
 {
@@ -176,6 +177,44 @@ namespace BlogicAssignment.Controllers
             await _context.AdvisorContracts.AddAsync(new AdvisorContract { ContractID = id, AdvisorID = advisorId });
             await _context.SaveChangesAsync();
             return RedirectToAction("Details", "Contracts", new { id });
+        }
+
+        public async Task<IActionResult> ExportToCSV()
+        {
+            var contracts = await _context.Contracts.Include(c => c.Client).Include(c => c.Supervisor).ToListAsync();
+            StringBuilder sb = new();
+            sb.AppendLine("Contract ID;Evidence number;Institution;Supervisor;Client;Start date;Valid date;End date;Additional advisors");
+            
+            foreach(Contract contract in contracts)
+            {
+                sb.Append($"{contract.ContractID};{contract.EvidenceNumber};{contract.Institution};{contract.Supervisor.FullName};{contract.Client.FullName};");
+                sb.Append($"{contract.ContractEnterDate};{contract.ContractValidSinceDate};{contract.ContractEndDate}");
+                // find advisors for this contract
+                var advisorContract = await _context.AdvisorContracts
+                .Include(c => c.Advisor)
+                .Where(c => c.ContractID == contract.ContractID)
+                .ToListAsync();
+
+                if(advisorContract.Any())
+                {
+                    var lastItem = advisorContract.LastOrDefault();
+                    sb.Append(';');
+                
+                    foreach (var ac in advisorContract)
+                    {
+                        if (ac == lastItem) 
+                        {
+                            sb.Append($"{ac.Advisor.FullName}");
+                        }
+                        else
+                        {
+                            sb.Append($"{ac.Advisor.FullName},");
+                        }
+                    }
+                }
+                sb.Append('\n');
+            }
+            return File(Encoding.UTF8.GetBytes(sb.ToString()), "text/csv", "Contracts.csv");
         }
     }
 }

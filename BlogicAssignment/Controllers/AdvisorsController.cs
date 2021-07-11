@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BlogicAssignment.Data;
 using BlogicAssignment.Models;
+using System.Text;
 
 namespace BlogicAssignment.Controllers
 {
@@ -140,6 +141,18 @@ namespace BlogicAssignment.Controllers
         private bool AdvisorExists(int id)
         {
             return _context.Advisors.Any(e => e.AdvisorID == id);
+        }
+
+        public async Task<IActionResult> ExportToCSV()
+        {
+            var advisors = await _context.Advisors.ToListAsync();
+            StringBuilder sb = new();
+            sb.AppendLine("Advisor ID;First name;Last name;Birth number;Age;Phone number;Email address");
+            foreach (Advisor advisor in advisors)
+            {
+                sb.AppendLine($"{advisor.AdvisorID};{advisor.FirstName};{advisor.LastName};{advisor.BirthNumber};{advisor.Age};{advisor.Phone};{advisor.Email}");
+            }
+            return File(Encoding.UTF8.GetBytes(sb.ToString()), "text/csv", "Advisors.csv");
         }
     }
 }
