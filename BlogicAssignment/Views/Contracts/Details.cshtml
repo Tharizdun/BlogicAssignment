@@ -66,7 +66,19 @@
             }
         }
     </dl>
-</div>
+    @if (@ViewBag.AvailableAdvisors != null)
+    {
+<form asp-action="AddAdvisor" class="row g-3 my-1">
+    <input type="hidden" name="id" value="@Model.ContractID" />
+    <div class="col-auto">
+        <select class="form-control" asp-items="@ViewBag.AvailableAdvisors" name="advisorId"></select>
+    </div>
+    <div class="col-auto">
+        <input type="submit" value="Add Advisor" class="btn btn-primary" />
+    </div>
+</form>
+    }
+    </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.ContractID">Edit</a> |
     <a asp-action="Index">Back to List</a>

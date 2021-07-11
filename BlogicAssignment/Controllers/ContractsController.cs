@@ -70,6 +70,16 @@ namespace BlogicAssignment.Controllers
             }
             else ViewData["Advisors"] = null;
 
+            // Find advisors not overseeing this contract
+            List<Advisor> allAdvisors = await _context.Advisors.ToListAsync();
+            List<Advisor> result = allAdvisors.Except(advisors).ToList();
+            result.Remove(contract.Supervisor);
+            if (result.Any())
+            {
+                ViewData["AvailableAdvisors"] = new SelectList(result, "AdvisorID", "FullName");
+            }
+            else ViewData["AvailableAdvisors"] = null;
+
             return View(contract);
         }
 
@@ -157,6 +167,15 @@ namespace BlogicAssignment.Controllers
         private bool ContractExists(int id)
         {
             return _context.Contracts.Any(e => e.ContractID == id);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddAdvisor(int id, int advisorId)
+        {
+            await _context.AdvisorContracts.AddAsync(new AdvisorContract { ContractID = id, AdvisorID = advisorId });
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Details", "Contracts", new { id });
         }
     }
 }
